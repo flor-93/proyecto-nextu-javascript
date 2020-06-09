@@ -8,9 +8,15 @@ function validation(form) {
     return false;
   }
 
-  if (form.names.value.trim().length < 3) {
+  if (
+    !form.names.value.trim().includes(' ') ||
+    form.names.value
+      .trim()
+      .split(' ')
+      .some((w) => w.length < 3)
+  ) {
     document.querySelector('#errorName').innerHTML =
-      'El nombre debe contener más de 3 cáracteres';
+      'Debe contener nombre completo';
     return false;
   }
 
@@ -87,8 +93,5 @@ function validation(form) {
   if (form.accept.checked) {
     document.querySelector('#errorAccept').innerHTML = '';
   }
-
-  alert('Datos enviados');
-
   return true;
 }
